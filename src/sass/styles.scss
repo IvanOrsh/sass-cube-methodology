@@ -59,6 +59,12 @@ img {
   max-width: 100%;
 }
 
+body {
+  font-family: $font-family;
+  font-size: $fs-400;
+  color: $blue-800;
+}
+
 // composition
 
 .container {
