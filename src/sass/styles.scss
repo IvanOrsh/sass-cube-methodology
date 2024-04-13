@@ -30,12 +30,12 @@ $size-36: 3rem;
 // mixins
 
 @mixin interactive-scale($color, $bg, $scale: 1.05) {
-  transform: scale(1);
-  transition: transform 350ms ease;
+  scale: 1;
+  transition: scale 350ms ease;
 
   &:hover,
   &:focus {
-    transform: scale($scale);
+    scale: $scale;
     color: $color;
     background-color: $bg;
   }
@@ -98,7 +98,7 @@ body {
   text-align: center;
 }
 .text-accent {
-  color: $red-400;
+  color: $red-500;
 }
 
 .page-title {
@@ -117,3 +117,68 @@ body {
 }
 
 // block
+
+.card {
+  $parent: &;
+
+  border-radius: $size-32;
+  overflow: hidden;
+  background-color: $neutral-100;
+  @extend %shadow;
+
+  h2 {
+    font-size: $fs-600;
+    font-weight: $fw-900;
+    text-transform: uppercase;
+  }
+
+  &[data-type="product"] {
+    #{$parent}__content {
+      position: relative;
+      padding: $size-32 $size-16 $size-16;
+      display: flex;
+      align-items: end;
+      gap: $size-16;
+      justify-content: space-between;
+    }
+
+    .button {
+      position: absolute;
+      right: $size-16;
+      top: 0;
+      transform: translateY(-50%);
+    }
+  }
+
+  &[data-type="link-with-image"] {
+    text-decoration: none;
+    color: $red-500;
+
+    @include interactive-scale($neutral-100, $blue-800);
+
+    #{$parent}__content {
+      padding: $size-16 $size-12;
+    }
+
+    img {
+      height: 8.75rem;
+      width: 100%;
+      object-fit: cover;
+      object-position: top center;
+    }
+  }
+}
+
+.button {
+  cursor: pointer;
+  display: inline-block;
+  border: 0;
+  text-decoration: none;
+
+  padding: $size-16;
+  background: $red-500;
+  color: $neutral-100;
+  border-radius: 100vw;
+  @extend %shadow;
+  @include interactive-scale($neutral-100, $red-500);
+}
